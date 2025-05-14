@@ -1,7 +1,7 @@
 # Личный проект «Readme»
 
 * Студент: [Татьяна Панина](https://up.htmlacademy.ru/nodejs-2/9/user/703337).
-* Наставник: `Неизвестно`.
+* Наставник: [Илиас Эззахид](https://htmlacademy.ru/profile/id2588943).
 
 ---
 
