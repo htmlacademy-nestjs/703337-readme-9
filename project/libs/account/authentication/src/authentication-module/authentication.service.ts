@@ -1,6 +1,6 @@
 import { ConflictException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
-import dayjs from 'dayjs';
-import { BlogUserRepository, BlogUserEntity, BlogUserFactory } from '@project/blog-user';
+//import dayjs from 'dayjs';
+import { BlogUserRepository, BlogUserEntity } from '@project/blog-user';
 
 import { CreateUserDto } from '../dto/create-user.dto';
 import { AUTH_USER_EXISTS, AUTH_USER_NOT_FOUND, AUTH_USER_PASSWORD_WRONG } from './authentication.constant';
@@ -39,8 +39,6 @@ export class AuthenticationService {
   public async verifyUser(dto: LoginUserDto) {
     const {email, password} = dto;
     
-    console.log('this blog repo');
-    console.log(this.blogUserRepository)
     const existUser = await this.blogUserRepository.findByEmail(email);
 
     if (!existUser) {

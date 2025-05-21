@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { BlogUserEntity } from './blog-user.entity';
 import { BlogUserFactory } from './blog-user.factory';
-import {BaseMemoryRepository} from '@project/data-access'
+import {BaseMemoryRepository} from '@project/data-access';
 
-Injectable()
+@Injectable()
 export class BlogUserRepository extends BaseMemoryRepository<BlogUserEntity> {
   constructor(entityFactory: BlogUserFactory) {
     super(entityFactory);
@@ -16,7 +16,7 @@ export class BlogUserRepository extends BaseMemoryRepository<BlogUserEntity> {
     if (! user) {
       return null;
     }
-console.log(this.entityFactory)
+
     return this.entityFactory.create(user);
   }
 }

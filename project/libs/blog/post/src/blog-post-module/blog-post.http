@@ -1,0 +1,54 @@
+# Create a new post
+POST http://localhost:3000/api/posts HTTP/1.1
+Content-Type: application/json
+
+{
+  "blogUser": {
+    "id": "26sdf",
+    "email": "this@email",
+    "name": "Masha",
+    "avatarUrl": "this.avatarUrl",
+    "passwordHash": "3456scvbnbk"
+  },
+  "type": "text",
+  "date": "this.date",
+  "repost": false,
+  "published": true,
+  "likes": 11115,
+  "comments": [{"text": "sghg"}, {"text": "ggggg"}, {"text": "dddd"}],
+  "name": "nestjs",
+  "preview": "framwork",
+  "message": "study course",
+  "tags": [{"text": "life"}, {"text":"htmlAcademy"}]
+}
+###
+
+# Get post
+GET http://localhost:3000/api/posts/e7328003-cc6f-469e-a65b-b20005d5e597 HTTP/1.1
+
+###
+
+# Get all posts
+GET http://localhost:3000/api/posts/ HTTP/1.1
+
+###
+
+# Create a new comment
+POST http://localhost:3000/api/posts/875855e4-7e7b-405e-84ff-be7420dd336b/comments HTTP/1.1
+Content-Type: application/json
+
+{
+  "user": {
+    "id": "26sdf",
+    "email": "this@email",
+    "name": "ggghh",
+    "avatarUrl": "this.avatarUrl"    
+  },
+  "date": "text",
+  "text": "это второй",
+  "postId": "875855e4-7e7b-405e-84ff-be7420dd336b"
+}
+
+###
+# Get a  comments
+GET http://localhost:3000/api/posts/9caefd1a-e17e-4b63-a781-26f546621064/comments HTTP/1.1

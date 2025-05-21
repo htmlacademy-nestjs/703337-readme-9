@@ -1,7 +1,9 @@
 import { compare, genSalt, hash } from 'bcrypt';
+
 import { Entity } from '@project/shared/core';
 import { StorableEntity, AuthUser} from '@project/shared/core';
 import { SALT_ROUNDS } from './blog-user.constant';
+
 
 export class BlogUserEntity extends Entity implements StorableEntity<AuthUser> {
   public email: string;

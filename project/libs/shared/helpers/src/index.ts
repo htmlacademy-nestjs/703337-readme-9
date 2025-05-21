@@ -1,1 +1,2 @@
-export * from './lib/shared-helpers';
+export { fillDto } from './lib/common';
+
