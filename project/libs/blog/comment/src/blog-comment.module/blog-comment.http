@@ -1,0 +1,4 @@
+# Get all comments for post
+GET http://localhost:3000/api/posts/83546bd4-3380-446f-a06a-5ff8892a71ef/comments HTTP/1.1
+
+###
