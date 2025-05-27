@@ -5,7 +5,7 @@ Content-Type: application/json
 {
   "email": "user@user.local",  
   "name": "Tanya",
-  "avatarUrl": "dfghd.png",
+  "avatarUrl": "Panina.png",
   "password": "123457"
 }
 
