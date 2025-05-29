@@ -4,11 +4,11 @@ Content-Type: application/json
 
 {
   "blogUser": {
-    "id": "26sdf",
-    "email": "this@email",
-    "name": "Masha",
-    "avatarUrl": "this.avatarUrl",
-    "passwordHash": "3456scvbnbk"
+    "id": "6835a05ef5b0e477fbfb28df",
+    "email": "test3@user.local",
+    "name": "Test3",
+    "avatarUrl": "test3.png",
+    "passwordHash": "$2b$10$FyekzgO.c0hfzW2FUBWS9.4VXHqY0bg1VVzyHr.aRmcU1P/3AC4b2"
   },
   "type": "text",
   "date": "this.date",

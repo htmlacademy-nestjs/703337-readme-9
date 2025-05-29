@@ -12,7 +12,7 @@ import { PostTypeUnion, Comment } from '@project/shared/core';
 export class BlogPostService {
   constructor(
     private readonly blogPostRepository: BlogPostRepository,
-    private readonly blogPstFactory: BlogTagService,
+    private readonly blogPostFactory: BlogTagService,
     private readonly blogTagService: BlogTagService,
     private readonly blogCommentRepository: BlogCommentRepository,
     private readonly blogCommentFactory: BlogCommentFactory,
@@ -23,7 +23,7 @@ export class BlogPostService {
   }
 
   public async createPost(dto: PostTypeUnion): Promise<BlogPostEntity> {
-    //const categories = await this.blogTagService.getCategoriesByIds(dto.tags);
+    
     const newPost = new BlogPostEntity(dto);
     await this.blogPostRepository.save(newPost);
 
