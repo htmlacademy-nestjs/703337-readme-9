@@ -15,7 +15,7 @@ export type PostTypeUnion = {
   date: string;
   repost: boolean;
   published: boolean;
-  likes: number;
+  likes?: number;
   comments?: Comment[];
   tags?: Tag[];
 
