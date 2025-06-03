@@ -20,3 +20,5 @@ async function bootstrap() {
 }
 
 bootstrap();
+
+//docker compose --file ./apps/blog/docker-compose.dev.yml --env-file ./apps/blog/blog.env --project-name "readme-blog" up -d

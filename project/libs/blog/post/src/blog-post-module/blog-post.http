@@ -12,12 +12,12 @@ Content-Type: application/json
   },
   "type": "text",
   "date": "this.date",
-  "repost": false,
+  
   "published": true,
   "likes": 11115,
   "comments": [{"text": "sghg"}, {"text": "ggggg"}, {"text": "dddd"}],
   "name": "nestjs",
-  "preview": "framwork",
+  "preview": "framework",
   "message": "study course",
   "tags": [{"text": "life"}, {"text":"htmlAcademy"}]
 }
