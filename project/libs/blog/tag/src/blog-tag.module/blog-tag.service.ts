@@ -43,7 +43,7 @@ export class BlogTagService {
   public async updateTag(id: string, dto: UpdateTagDto): Promise<BlogTagEntity> {
     const blogTagEntity = new BlogTagEntity(dto);
     blogTagEntity.id = id;
-//console.log(blogTagEntity.id)
+
     try {
       await this.blogTagRepository.update(blogTagEntity);
       return blogTagEntity;

@@ -1,21 +1,23 @@
-import { Entity, AuthUser, Tag } from '@project/shared/core';
+import { Entity, Tag } from '@project/shared/core';
 import { Comment } from '@project/shared/core';
 import { StorableEntity, PostType} from '@project/shared/core';
-import {BlogTagFactory} from '../../../tag/src/blog-tag.module/blog-tag.factory';
-import { BlogCommentFactory } from '@project/blog/comment';
+import {BlogTagFactory, BlogTagEntity} from '@project/tag';
+import { BlogCommentFactory, BlogCommentEntity } from '@project/blog/comment';
 
-import { PostTypeUnion } from '@project/shared/core';
+import { Post } from '@project/shared/core';
 
-export class BlogPostEntity extends Entity implements StorableEntity<PostTypeUnion> {
+export class BlogPostEntity extends Entity implements StorableEntity<Post> {
   
-  public postUser: AuthUser;
+  public userId: string;
   public type: PostType;
+  public createdAt?: Date;
+  public updatedAt?: Date;
   public date: string;
   public repost: boolean;
   public published: boolean;
-  public likes: number;
-  public comments: Comment[];
-  public tags?: Tag[];
+  public likes?: [];
+  public comments: BlogCommentEntity[];
+  public tags?: BlogTagEntity[];
 
   public text: string;
   public message: string;
@@ -27,22 +29,22 @@ export class BlogPostEntity extends Entity implements StorableEntity<PostTypeUni
   public reference: string
   public description: string;
 
-  constructor(post?: PostTypeUnion) {
+  constructor(post?: Post) {
     super();
     this.populate(post)
   }
 
-  public toPOJO(): PostTypeUnion {
+  public toPOJO(): Post {
     const baseType = {
       id: this.id,
-      postUser: this.postUser,
+      userId: this.userId,
       type: this.type,
       date: this.date,
       repost: this.repost,
       published: this.published,
       likes: this.likes,
-      comments: this.comments,
-      tags: this.tags
+      comments: this.comments.map((commentEntity) => commentEntity.toPOJO()),
+      tags: this.tags.map((tagEntity) => tagEntity.toPOJO())
     };
 
     switch(this.type){
@@ -81,17 +83,18 @@ export class BlogPostEntity extends Entity implements StorableEntity<PostTypeUni
     }
   }
 
-  public populate(data: PostTypeUnion): void { 
+  public populate(data: Post): void { 
     if (! data) {
       return;
     }
     this.id = data.id ?? undefined
-    this.postUser = data.postUser;
+    this.userId = data.userId;
     this.type = data.type;
-    this.date = data.date;
+    this.createdAt = data.createdAt;
+    this.updatedAt = data.updatedAt;
     this.repost = data.repost;
     this.published = data.published;
-    this.likes = data.likes;
+    this.likes = [];
     this.comments = [];
     this.tags = [];
 

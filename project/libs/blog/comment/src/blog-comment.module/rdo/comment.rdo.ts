@@ -5,7 +5,7 @@ export class CommentRdo {
   public postId: string;
 
   @Expose()
-  public text: string;
+  public message: string;
 
   @Expose()
   public userId: string;

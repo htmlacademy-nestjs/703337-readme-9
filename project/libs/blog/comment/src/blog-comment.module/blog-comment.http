@@ -1,4 +1,16 @@
 # Get all comments for post
-GET http://localhost:3000/api/posts/83546bd4-3380-446f-a06a-5ff8892a71ef/comments HTTP/1.1
+GET http://localhost:3000/api/posts/ab04593b-da99-4fe3-8b4b-e06d82e2efdd/comments HTTP/1.1
+
+###
+
+
+# Create a new comment for post
+POST http://localhost:3000/api/posts/6d308040-96a2-4162-bea6-2338e9976540/comments HTTP/1.1
+Content-Type: application/json
+
+{
+  "message": "This is text",
+  "userId": "65990102bb965b742900ba59"
+}
 
 ###

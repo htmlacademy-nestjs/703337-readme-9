@@ -4,7 +4,7 @@ import {BlogTagModule} from '@project/tag';
 import {BlogPostModule} from '@project/blog/post';
 
 @Module({
-  imports: [BlogTagModule],
+  imports: [BlogTagModule, BlogCommentModule, BlogPostModule],
   controllers: [],
   providers: [],
 })

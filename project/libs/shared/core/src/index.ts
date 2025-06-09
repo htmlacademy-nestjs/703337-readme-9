@@ -11,6 +11,7 @@ export { EntityFactory } from './lib/interfaces/entity-factory.interface';
 export {SortDirection} from './lib/interfaces/sort-direction.interface';
 
 export {Post, PostType} from './lib/types/post.interface';
+export {PaginationResult} from './lib/interfaces/pagination.interface';
 export { Comment } from './lib/types/comment.interface';
 export {Tag} from './lib/types/tag.interface';
 export {CitationPost} from './lib/types/citation-post.interface';
