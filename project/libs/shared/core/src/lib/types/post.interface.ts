@@ -3,6 +3,7 @@ import { Comment } from './comment.interface';
 import { Tag } from './tag.interface';
 import { Like } from './like.interface';
 
+
 export enum PostType {
   Video = 'video',
   Text = 'text',

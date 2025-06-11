@@ -20,3 +20,5 @@ export {TextPost} from './lib/types/text-post.interface';
 export {ReferencePost} from './lib/types/reference-post.interface';
 export {PhotoPost} from './lib/types/photo-post.interface';
 export {PostTypeUnion} from './lib/types/post-type-union';
+export { Token } from './lib/interfaces/token.interface';
+export { TokenPayload } from './lib/interfaces/token-payload.interface';

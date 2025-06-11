@@ -3,13 +3,14 @@
 
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-enum PostType {
- video 
- text 
- photo 
- citation
- reference 
- }
+
+ enum PostType {
+  video
+  text
+  photo
+  citation
+  reference
+}
 
 generator client {
   provider = "prisma-client-js"

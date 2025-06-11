@@ -1,10 +1,11 @@
-import { Entity, Tag } from '@project/shared/core';
-import { Comment } from '@project/shared/core';
+import { Entity } from '@project/shared/core';
+//import { Comment } from '@project/shared/core';
 import { StorableEntity, PostType} from '@project/shared/core';
 import {BlogTagFactory, BlogTagEntity} from '@project/tag';
 import { BlogCommentFactory, BlogCommentEntity } from '@project/blog/comment';
 
 import { Post } from '@project/shared/core';
+//import { Post } from '@prisma/client';
 
 export class BlogPostEntity extends Entity implements StorableEntity<Post> {
   

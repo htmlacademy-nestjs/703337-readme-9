@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-
+import { PostType } from '@prisma/client';
 
 const FIRST_TAG_UUID = '39614113-7ad5-45b6-8093-06455437e1e2';
 const SECOND_TAG_UUID = 'efd775e2-df55-4e0e-a308-58249f5ea202';
@@ -24,6 +24,7 @@ function getPosts() {
   return [
     {
       id: FIRST_POST_UUID,
+      type: 'citation',
       repost: undefined,
       published: undefined,
       userId: FIRST_USER_ID,
@@ -83,7 +84,7 @@ async function seedDb(prismaClient: PrismaClient) {
       update: {},
       create: {
         id: post.id,
-        type: post.type,
+        type: post.type as PostType,
         repost: post.repost,
         published: post.published,
         tags: post.tags,

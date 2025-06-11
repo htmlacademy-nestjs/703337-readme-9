@@ -122,7 +122,7 @@ export class BlogPostRepository extends BasePostgresRepository<BlogPostEntity, P
     ]);
 
     return {
-      entities: records.map((record) => this.createEntityFromDocument(record)),
+      entities: records.map((record) => this.createEntityFromDocument(record as Post)),
       currentPage: query?.page,
       totalPages: this.calculatePostsPage(postCount, take),
       itemsPerPage: take,
