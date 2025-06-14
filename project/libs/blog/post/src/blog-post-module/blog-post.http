@@ -52,3 +52,9 @@ Content-Type: application/json
 ###
 # Get a  comments
 GET http://localhost:3000/api/posts/9caefd1a-e17e-4b63-a781-26f546621064/comments HTTP/1.1
+###
+
+# Delete the post by id
+DELETE http://localhost:3000/api/posts/6d308040-96a2-4162-bea6-2338e9976540 HTTP/1.1
+
+###

@@ -1,8 +1,8 @@
-import { AuthUser } from './auth-user.interface';
+//import { AuthUser } from './auth-user.interface';
 
 export interface Like {
   id?: string;
-  user: AuthUser;
+  userId: string;
   postId: string;
   value: boolean;
 }

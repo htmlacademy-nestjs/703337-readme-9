@@ -1,6 +1,8 @@
-import { AuthUser } from './auth-user.interface';
+
 import { Comment } from './comment.interface';
 import { Tag } from './tag.interface';
+import { Like } from './like.interface';
+
 
 export enum PostType {
   Video = 'video',
@@ -10,14 +12,26 @@ export enum PostType {
   Reference = 'reference',
 }
 
+//export type PostType = 'video' | 'text' | 'photo' | 'citation'| 'reference';
+
 export interface Post {
   id?: string;
-  postUser: AuthUser;
+  userId: string;
   type: PostType;
-  date: string;
+  createdAt?: Date;
+  updatedAt?: Date;
   repost: boolean;
   published: boolean;
-  likes?: number;
+  likes?: Like[];
   comments?: Comment[];
   tags?: Tag[];
+  text?: string;
+  message?: string;
+  preview?: string;
+  author?: string;
+  photoPath?: string;
+  name?: string;
+  link?: string;
+  reference?: string
+  description?: string;
 }

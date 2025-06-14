@@ -4,6 +4,14 @@
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
+ enum PostType {
+  video
+  text
+  photo
+  citation
+  reference
+}
+
 generator client {
   provider = "prisma-client-js"
   output = "../../../../node_modules/.prisma/client"
@@ -17,7 +25,7 @@ datasource db {
 model Post {
   id          String   @id @default(uuid()) @map("id")
   userId      String @map("user_id")
-  type        String @default("text")
+  type        PostType
   createdAt   DateTime @default(now()) @map("created_at")
   updatedAt   DateTime @updatedAt @map("updated_at")
   repost      Boolean @default(false)

@@ -32,7 +32,7 @@ PATCH http://localhost:3000/api/tags/28f39af9-299d-4363-ab88-265b56e0f3ed HTTP/1
 Content-Type: application/json
 
 {
-  "text": "Thisis"
+  "text": "Nestjs"
 }
 
 ###
