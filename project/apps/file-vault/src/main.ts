@@ -20,3 +20,6 @@ async function bootstrap() {
 }
 
 bootstrap();
+
+
+//docker compose --file ./apps/file-vault/file-vault.compose.dev.yml --env-file ./apps/file-vault/file-vault.env --project-name "readme-file-vault" up -d
