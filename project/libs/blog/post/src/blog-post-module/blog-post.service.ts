@@ -1,30 +1,35 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+
+import { PaginationResult } from '@project/shared/core';
+
+
 import { BlogPostRepository } from './blog-post.repository';
 import { BlogPostEntity } from './blog-post.entity';
-//import { BlogPostFactory } from './blog-post.factory';
-//import { CreatePostDto } from './dto/create-post-type.dto';
+import { BlogPostQuery } from './blog-post.query';
+import { BlogPostFactory } from './blog-post.factory';
+import { CreatePostDto } from './dto/create-post.dto';
+import { UpdatePostDto } from './dto/update-post.dto';
 
 import {BlogTagService} from '@project/tag';
-import {BlogCommentFactory, BlogCommentRepository, BlogCommentEntity} from '@project/blog/comment';
-import { PostTypeUnion, Comment } from '@project/shared/core';
+//import {BlogCommentFactory, BlogCommentRepository, BlogCommentEntity} from '@project/blog/comment';
+//import { Comment } from '@project/shared/core';
 
 @Injectable()
 export class BlogPostService {
   constructor(
-    private readonly blogPostRepository: BlogPostRepository,
-    private readonly blogPostFactory: BlogTagService,
+    private readonly blogPostRepository: BlogPostRepository,    
     private readonly blogTagService: BlogTagService,
-    private readonly blogCommentRepository: BlogCommentRepository,
-    private readonly blogCommentFactory: BlogCommentFactory,
+    //private readonly blogCommentRepository: BlogCommentRepository,
+    //private readonly blogCommentFactory: BlogCommentFactory,
   ) {}
 
-  public async getAllPosts(): Promise<PostTypeUnion[]> {
-    return this.blogPostRepository.find();
+  public async getAllPosts(query?: BlogPostQuery): Promise<PaginationResult<BlogPostEntity>> {
+    return this.blogPostRepository.find(query);
   }
 
-  public async createPost(dto: PostTypeUnion): Promise<BlogPostEntity> {
-    
-    const newPost = new BlogPostEntity(dto);
+  public async createPost(dto: CreatePostDto): Promise<BlogPostEntity> {
+    const tags = await this.blogTagService.getTagsByIds(dto.tags);
+    const newPost = BlogPostFactory.createFromCreatePostDto(dto, tags);
     await this.blogPostRepository.save(newPost);
 
     return newPost;
@@ -42,45 +47,45 @@ export class BlogPostService {
     return this.blogPostRepository.findById(id);
   }
 
-  // public async updatePost(id: string, dto: UpdatePostDto): Promise<BlogPostEntity> {
-  //   const existsPost = await this.blogPostRepository.findById(id);
-  //   let isSameCategories = true;
-  //   let hasChanges = false;
+  public async updatePost(id: string, dto: UpdatePostDto): Promise<BlogPostEntity> {
+    const existsPost = await this.blogPostRepository.findById(id);
+    let isSameTags = true;
+    let hasChanges = false;
 
-  //   for (const [key, value] of Object.entries(dto)) {
-  //     if (value !== undefined && key !== 'categories' && existsPost[key] !== value) {
-  //       existsPost[key] = value;
-  //       hasChanges = true;
-  //     }
+    for (const [key, value] of Object.entries(dto)) {
+      if (value !== undefined && key !== 'tags' && existsPost[key] !== value) {
+        existsPost[key] = value;
+        hasChanges = true;
+      }
 
-  //     if (key === 'categories' && value) {
-  //       const currentCategoryIds = existsPost.categories.map((category) => category.id);
-  //       isSameCategories = currentCategoryIds.length === value.length &&
-  //         currentCategoryIds.some((categoryId) => value.includes(categoryId));
+      if (key === 'tags' && value) {
+        const currentTagIds = existsPost.tags.map((tag) => tag.id);
+        isSameTags = currentTagIds.length === value.length &&
+          currentTagIds.some((tagId) => value.includes(tagId));
 
-  //       if (! isSameCategories) {
-  //         existsPost.categories = await this.blogCategoryService.getCategoriesByIds(dto.categories);
-  //       }
-  //     }
-  //   }
-
-  //   if (isSameCategories && ! hasChanges) {
-  //     return existsPost;
-  //   }
-
-  //   await this.blogPostRepository.update(existsPost);
-
-  //   return existsPost;
-  // }
-
-  public async addComment(postId: string, dto: Comment): Promise<BlogCommentEntity> {
-    const existsPost = await this.getPost(postId);
-    const newComment = this.blogCommentFactory.create(dto);
-    if(existsPost){
-      await this.blogCommentRepository.save(newComment);
-      return newComment;
+        if (! isSameTags) {
+          existsPost.tags = await this.blogTagService.getTagsByIds(dto.tags);
+        }
+      }
     }
 
-    
+    if (isSameTags && ! hasChanges) {
+      return existsPost;
+    }
+
+    await this.blogPostRepository.update(existsPost);
+
+    return existsPost;
   }
+
+  // public async addComment(postId: string, dto: Comment): Promise<BlogCommentEntity> {
+  //   const existsPost = await this.getPost(postId);
+  //   const newComment = this.blogCommentFactory.create(dto);
+  //   if(existsPost){
+  //     await this.blogCommentRepository.save(newComment);
+  //     return newComment;
+  //   }
+
+    
+  // }
 }

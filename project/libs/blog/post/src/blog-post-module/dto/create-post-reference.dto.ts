@@ -1,9 +1,17 @@
 import { PostType } from '@project/shared/core';
 import { AuthUser, Tag } from '@project/shared/core';
+import {
+  ArrayNotEmpty,
+  IsArray,
+  IsMongoId,
+  IsNotEmpty,
+  IsString,
+  IsUUID
+} from 'class-validator';
 
 export class CreatePostReferenceDto {
   public id?: string;
-  public postUser: AuthUser;
+  public userId: string;
   public type: PostType;
   public date: string;
   public repost: boolean;

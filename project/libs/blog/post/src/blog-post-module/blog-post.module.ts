@@ -6,8 +6,10 @@ import { BlogPostRepository } from './blog-post.repository';
 import { BlogCommentModule } from '@project/blog/comment';
 import { BlogTagModule } from '@project/tag';
 
+import { PrismaClientModule } from '@project/blog-models';
+
 @Module({
-  imports:[BlogCommentModule, BlogTagModule],
+  imports:[BlogCommentModule, BlogTagModule, PrismaClientModule],
   providers: [BlogPostService, BlogPostFactory, BlogPostRepository],
   exports:[BlogPostService],
   controllers:[BlogPostController]
