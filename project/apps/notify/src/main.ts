@@ -20,3 +20,5 @@ async function bootstrap() {
 }
 
 bootstrap();
+
+//docker compose --file ./apps/notify/notify.compose.dev.yml --project-name "readme-notify" up -d
