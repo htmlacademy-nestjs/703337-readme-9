@@ -1,5 +1,3 @@
-
-
 //export * from './lib/shared-core';
 export {User} from './lib/types/user.interface';
 export {AuthUser} from './lib/types/auth-user.interface';
@@ -24,3 +22,5 @@ export { Token } from './lib/interfaces/token.interface';
 export { TokenPayload } from './lib/interfaces/token-payload.interface';
 export { File } from './lib/types/file.interface';
 export { StoredFile } from './lib/types/stored-file.interface';
+export { RabbitRouting } from './lib/types/rabbit-routing.enum';
+export { Subscriber } from './lib/types/subscriber.interface';

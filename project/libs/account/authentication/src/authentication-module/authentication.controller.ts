@@ -12,13 +12,15 @@ import {MongoIdValidationPipe} from '@project/pipes';
 
 import { JwtAuthGuard } from '../guards/jwt-auth.guard';
 import { fillDto } from '@project/shared/helpers';
+import { NotifyService } from '@project/account-notify';
 
 @ApiTags('authentication')
 @Controller('auth')
 @Injectable()
 export class AuthenticationController {
   constructor(
-    private readonly authService: AuthenticationService
+    private readonly authService: AuthenticationService,
+    private readonly notifyService: NotifyService,
   ) {}
 
   @ApiResponse({
@@ -33,6 +35,8 @@ export class AuthenticationController {
   public async create(@Body() dto: CreateUserDto) {
     
     const newUser = await this.authService.register(dto);
+    const { email, name } = newUser;
+    await this.notifyService.registerSubscriber({ email, name });
     
     return newUser.toPOJO();
   }
