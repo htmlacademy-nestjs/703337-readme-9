@@ -11,16 +11,16 @@ import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 
 import {BlogTagService} from '@project/tag';
-//import {BlogCommentFactory, BlogCommentRepository, BlogCommentEntity} from '@project/blog/comment';
-//import { Comment } from '@project/shared/core';
+import {BlogCommentFactory, BlogCommentRepository, BlogCommentEntity} from '@project/blog/comment';
+import { Comment } from '@project/shared/core';
 
 @Injectable()
 export class BlogPostService {
   constructor(
     private readonly blogPostRepository: BlogPostRepository,    
     private readonly blogTagService: BlogTagService,
-    //private readonly blogCommentRepository: BlogCommentRepository,
-    //private readonly blogCommentFactory: BlogCommentFactory,
+    private readonly blogCommentRepository: BlogCommentRepository,
+    private readonly blogCommentFactory: BlogCommentFactory,
   ) {}
 
   public async getAllPosts(query?: BlogPostQuery): Promise<PaginationResult<BlogPostEntity>> {
@@ -78,14 +78,12 @@ export class BlogPostService {
     return existsPost;
   }
 
-  // public async addComment(postId: string, dto: Comment): Promise<BlogCommentEntity> {
-  //   const existsPost = await this.getPost(postId);
-  //   const newComment = this.blogCommentFactory.create(dto);
-  //   if(existsPost){
-  //     await this.blogCommentRepository.save(newComment);
-  //     return newComment;
-  //   }
-
-    
-  // }
+  public async addComment(postId: string, dto: Comment): Promise<BlogCommentEntity> {
+     const existsPost = await this.getPost(postId);
+     const newComment = this.blogCommentFactory.create(dto);
+     if(existsPost){
+       await this.blogCommentRepository.save(newComment);
+       return newComment;
+     }    
+   }
 }

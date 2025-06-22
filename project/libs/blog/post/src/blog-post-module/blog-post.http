@@ -1,25 +1,18 @@
 # Create a new post
-POST http://localhost:3000/api/posts HTTP/1.1
+POST http://localhost:4000/api/posts HTTP/1.1
 Content-Type: application/json
 
 {
-  "blogUser": {
-    "id": "6835a05ef5b0e477fbfb28df",
-    "email": "test3@user.local",
-    "name": "Test3",
-    "avatarUrl": "test3.png",
-    "passwordHash": "$2b$10$FyekzgO.c0hfzW2FUBWS9.4VXHqY0bg1VVzyHr.aRmcU1P/3AC4b2"
-  },
-  "type": "text",
-  "date": "this.date",
   
+  "userId": "6853faae0406481e9aa93886",
+  "type": "text",
   "published": true,
-  "likes": 11115,
+  "repost": false,
   "comments": [{"text": "sghg"}, {"text": "ggggg"}, {"text": "dddd"}],
-  "name": "nestjs",
-  "preview": "framework",
-  "message": "study course",
-  "tags": [{"text": "life"}, {"text":"htmlAcademy"}]
+  "name": "text2",
+  "preview": "text2",
+  "message": "text2",
+  "tags": ["39614113-7ad5-45b6-8093-06455437e1e2"]
 }
 ###
 

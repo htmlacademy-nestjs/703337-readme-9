@@ -28,6 +28,7 @@ export class BlogPostRepository extends BasePostgresRepository<BlogPostEntity, P
 
   public async save(entity: BlogPostEntity): Promise<void> {
     const pojoEntity = entity.toPOJO();
+    
     const record = await this.client.post.create({
       data: {
         ...pojoEntity,
@@ -45,7 +46,24 @@ export class BlogPostRepository extends BasePostgresRepository<BlogPostEntity, P
 
     entity.id = record.id;
   }
-
+// await prismaClient.post.upsert({
+//       where: { id: post.id },
+//       update: {},
+//       create: {
+//         id: post.id,
+//         type: post.type as PostType,
+//         repost: post.repost,
+//         published: post.published,
+//         tags: post.tags,
+//         userId: post.userId,
+//         comments: post.comments ? {
+//           create: post.comments
+//         } : undefined,
+//         likes: post.likes ? {
+//           create: post.likes
+//         } : undefined
+//       }
+//     })
   public async deleteById(id: string): Promise<void> {
     await this.client.post.delete({
       where: {

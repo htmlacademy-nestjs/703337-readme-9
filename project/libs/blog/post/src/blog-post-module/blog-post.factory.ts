@@ -12,9 +12,9 @@ export class BlogPostFactory implements EntityFactory<BlogPostEntity> {
     return new BlogPostEntity(entityPlainData);
   }
 
-  public static createFromCreatePostDto(dto: CreatePostDto, tags: BlogTagEntity[]): BlogPostEntity {
+  public static createFromCreatePostDto(dto: CreatePostDto, tags?: BlogTagEntity[]): BlogPostEntity {
     const entity = new BlogPostEntity();
-    entity.tags = tags;
+    entity.tags = tags ?? [];
     entity.type = dto.type;
     
     entity.userId = dto.userId;

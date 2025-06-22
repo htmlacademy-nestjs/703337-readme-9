@@ -9,6 +9,6 @@ import { PrismaClientModule } from '@project/blog-models';
   imports: [PrismaClientModule],
   controllers: [BlogCommentController],
   providers: [BlogCommentService, BlogCommentRepository, BlogCommentFactory],
-  
+  exports:[BlogCommentRepository, BlogCommentFactory]
 })
 export class BlogCommentModule {}
