@@ -17,6 +17,8 @@ export class BlogTagRepository extends BasePostgresRepository<BlogTagEntity, Tag
   }
 
   public async save(entity: BlogTagEntity): Promise<void> {
+    const aaa = entity.toPOJO();
+    console.log(aaa)
     const record = await this.client.tag.create({
       data: { ...entity.toPOJO() }
     });

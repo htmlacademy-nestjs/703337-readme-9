@@ -5,14 +5,16 @@ Content-Type: application/json
 {
   
   "userId": "6853faae0406481e9aa93886",
-  "type": "text",
+  "type": "video",
   "published": true,
-  "repost": false,
-  "comments": [{"text": "sghg"}, {"text": "ggggg"}, {"text": "dddd"}],
-  "name": "text2",
-  "preview": "text2",
-  "message": "text2",
-  "tags": ["39614113-7ad5-45b6-8093-06455437e1e2"]
+  "repost": true,
+  "photoPath": "//any photo",
+  //"link": "http//",
+  "name": "text40",
+  "message": "Это текст",
+  //"preview": "preview text",
+  "author": "Mikle",
+  "tags": ["b0f5cb58-0d16-4035-ac9d-3f2957672220"]
 }
 ###
 

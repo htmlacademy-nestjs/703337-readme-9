@@ -1,5 +1,5 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-
+import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
+import { PostType } from '@project/shared/core';
 import { PaginationResult } from '@project/shared/core';
 
 
@@ -29,10 +29,22 @@ export class BlogPostService {
 
   public async createPost(dto: CreatePostDto): Promise<BlogPostEntity> {
     const tags = await this.blogTagService.getTagsByIds(dto.tags);
-    const newPost = BlogPostFactory.createFromCreatePostDto(dto, tags);
+    
+    try{
+      if(dto.type === PostType.Text && (!dto.preview || !dto.name || !dto.message)){
+       throw new Error();
+      }
+      const newPost = BlogPostFactory.createFromCreatePostDto(dto, tags);
+    
     await this.blogPostRepository.save(newPost);
 
     return newPost;
+    }catch{
+      throw new BadRequestException(`Post type ${dto.type} must have field preview, name, message.`);
+    }
+      
+    
+    
   }
 
   public async deletePost(id: string): Promise<void> {

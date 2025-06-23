@@ -30,7 +30,7 @@ export class BlogTagController {
   @Post('/')
   public async create(@Body() dto: CreateTagDto) {
     const newTag = await this.blogTagService.createTag(dto);
-    return newTag.toPOJO();
+    return fillDto(TagRdo, newTag.toPOJO());
   }
 
   @Delete('/:id')

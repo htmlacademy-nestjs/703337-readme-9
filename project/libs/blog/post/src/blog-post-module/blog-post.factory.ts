@@ -21,6 +21,15 @@ export class BlogPostFactory implements EntityFactory<BlogPostEntity> {
     entity.published = dto.published;
     entity.repost = dto.repost;
     entity.comments = [];
+    entity.text = dto.text ?? undefined;
+    entity.message = dto.message ?? undefined;
+    entity.preview = dto.preview ?? undefined;
+    entity.author = dto.author ?? undefined;
+    entity.photoPath = dto.photoPath ?? undefined;
+    entity.name = dto.name ?? undefined;
+    entity.link = dto.link ?? undefined;
+    entity.reference = dto.reference ?? undefined;
+    entity.description = dto.author ?? undefined;
 
     return entity;
   }

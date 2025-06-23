@@ -9,8 +9,7 @@ import {
 import { PostType } from '@project/shared/core';
 
 export class CreatePostDto {
-  @IsOptional()
-  public id: string;
+  
   
   @IsString()
   @IsNotEmpty()

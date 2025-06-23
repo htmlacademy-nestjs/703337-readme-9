@@ -18,7 +18,7 @@ export class BlogController {
   @UseGuards(CheckAuthGuard)
   @UseInterceptors(InjectUserIdInterceptor)
   @Post('/')
-  public async create(@Body() dto: CreatePostDto) {
+  public async create(@Body() dto: CreatePostDto) {    
     const { data } = await this.httpService.axiosRef.post(`${ApplicationServiceURL.Blog}/`, dto);
     return data;
   }

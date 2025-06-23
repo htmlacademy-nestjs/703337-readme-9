@@ -84,11 +84,11 @@ export class BlogPostEntity extends Entity implements StorableEntity<Post> {
     }
   }
 
-  public populate(data: Post): void { 
+  public populate(data?: Post): void { 
     if (! data) {
       return;
     }
-    //this.id = data.id ?? undefined;
+    this.id = data.id ?? undefined;
     this.userId = data.userId;
     this.type = data.type;
     this.createdAt = data.createdAt;

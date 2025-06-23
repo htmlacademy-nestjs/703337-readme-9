@@ -16,13 +16,17 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2ODUzZmFhZ
 
 # Create a new post
 POST http://localhost:3333/api/blog HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2ODUzZmFhZTA0MDY0ODFlOWFhOTM4ODYiLCJlbWFpbCI6InBhbmluYUB1c2VyLmxvY2FsIiwibmFtZSI6IlBhbmluYSIsImlhdCI6MTc1MDU5NTMwNCwiZXhwIjoxNzUwNTk1NjA0fQ.h_5o2i9mFbrzWUgR-qWSlx54iHyAtKEGI1Jk1wjqI2I
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2ODUzZmFhZTA0MDY0ODFlOWFhOTM4ODYiLCJlbWFpbCI6InBhbmluYUB1c2VyLmxvY2FsIiwibmFtZSI6IlBhbmluYSIsImlhdCI6MTc1MDY4NTg3OCwiZXhwIjoxNzUwNjg2MTc4fQ.OuR14pLFopo1MfK-fH8w1wo8tlJpfHug5BEnDr6J8nM
+Content-Type: application/json
 
 {
-  "type": "text",
+  "userId": "6853faae0406481e9aa93886",
+  "type": "citation",
   "published": true,
   "repost": false,
-  "userId": "6853faae0406481e9aa93886"
   
+  "text": "text39",
+  "author": "Frank",
+  "tags": ["1b54654a-bb7c-446e-8164-db47d1ec3a48"]  
 }
 ###
