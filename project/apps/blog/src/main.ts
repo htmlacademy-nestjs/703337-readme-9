@@ -9,7 +9,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app/app.module';
 
 const globalPrefix = 'api';
-const DEFAULT_PORT = 3000;
+const DEFAULT_PORT = 4000;
 const port = process.env.PORT || DEFAULT_PORT;
 
 async function bootstrap() {

@@ -21,6 +21,7 @@ export class BlogTagService {
   }
 
   public async createTag(dto: CreateTagDto): Promise<BlogTagEntity> {
+    console.log(dto);
     const existsTag = (await this.blogTagRepository.find({text: dto.text})). at(0);
     if (existsTag) {
       throw new ConflictException('A tag with the text already exists');

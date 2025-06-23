@@ -12,7 +12,6 @@ export enum PostType {
   Reference = 'reference',
 }
 
-//export type PostType = 'video' | 'text' | 'photo' | 'citation'| 'reference';
 
 export interface Post {
   id?: string;

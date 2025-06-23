@@ -1,5 +1,5 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-
+import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
+import { PostType } from '@project/shared/core';
 import { PaginationResult } from '@project/shared/core';
 
 
@@ -11,16 +11,16 @@ import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 
 import {BlogTagService} from '@project/tag';
-//import {BlogCommentFactory, BlogCommentRepository, BlogCommentEntity} from '@project/blog/comment';
-//import { Comment } from '@project/shared/core';
+import {BlogCommentFactory, BlogCommentRepository, BlogCommentEntity} from '@project/blog/comment';
+import { Comment } from '@project/shared/core';
 
 @Injectable()
 export class BlogPostService {
   constructor(
     private readonly blogPostRepository: BlogPostRepository,    
     private readonly blogTagService: BlogTagService,
-    //private readonly blogCommentRepository: BlogCommentRepository,
-    //private readonly blogCommentFactory: BlogCommentFactory,
+    private readonly blogCommentRepository: BlogCommentRepository,
+    private readonly blogCommentFactory: BlogCommentFactory,
   ) {}
 
   public async getAllPosts(query?: BlogPostQuery): Promise<PaginationResult<BlogPostEntity>> {
@@ -29,10 +29,22 @@ export class BlogPostService {
 
   public async createPost(dto: CreatePostDto): Promise<BlogPostEntity> {
     const tags = await this.blogTagService.getTagsByIds(dto.tags);
-    const newPost = BlogPostFactory.createFromCreatePostDto(dto, tags);
+    
+    try{
+      if(dto.type === PostType.Text && (!dto.preview || !dto.name || !dto.message)){
+       throw new Error();
+      }
+      const newPost = BlogPostFactory.createFromCreatePostDto(dto, tags);
+    
     await this.blogPostRepository.save(newPost);
 
     return newPost;
+    }catch{
+      throw new BadRequestException(`Post type ${dto.type} must have field preview, name, message.`);
+    }
+      
+    
+    
   }
 
   public async deletePost(id: string): Promise<void> {
@@ -78,14 +90,12 @@ export class BlogPostService {
     return existsPost;
   }
 
-  // public async addComment(postId: string, dto: Comment): Promise<BlogCommentEntity> {
-  //   const existsPost = await this.getPost(postId);
-  //   const newComment = this.blogCommentFactory.create(dto);
-  //   if(existsPost){
-  //     await this.blogCommentRepository.save(newComment);
-  //     return newComment;
-  //   }
-
-    
-  // }
+  public async addComment(postId: string, dto: Comment): Promise<BlogCommentEntity> {
+     const existsPost = await this.getPost(postId);
+     const newComment = this.blogCommentFactory.create(dto);
+     if(existsPost){
+       await this.blogCommentRepository.save(newComment);
+       return newComment;
+     }    
+   }
 }

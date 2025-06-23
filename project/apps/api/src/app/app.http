@@ -1,0 +1,32 @@
+# Login user by email and password
+POST http://localhost:3333/api/users/login HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "panina@user.local",
+  "password": "123456"
+}
+
+###
+
+# Get new JWT pair
+POST http://localhost:3333/api/users/refresh HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2ODUzZmFhZTA0MDY0ODFlOWFhOTM4ODYiLCJlbWFpbCI6InBhbmluYUB1c2VyLmxvY2FsIiwibmFtZSI6IlBhbmluYSIsInRva2VuSWQiOiJlZGY1ZmZhMy1lZDFhLTRmMzgtYmRlZC04MjBhMDU2ZjM5OWYiLCJpYXQiOjE3NTA1MjIyMjAsImV4cCI6MTc1MzExNDIyMH0.4y2h6YK8ZNSkdEB-jD1N0mSJGi4sDg8XasxlI7RccWE
+###
+
+# Create a new post
+POST http://localhost:3333/api/blog HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2ODUzZmFhZTA0MDY0ODFlOWFhOTM4ODYiLCJlbWFpbCI6InBhbmluYUB1c2VyLmxvY2FsIiwibmFtZSI6IlBhbmluYSIsImlhdCI6MTc1MDY4NTg3OCwiZXhwIjoxNzUwNjg2MTc4fQ.OuR14pLFopo1MfK-fH8w1wo8tlJpfHug5BEnDr6J8nM
+Content-Type: application/json
+
+{
+  "userId": "6853faae0406481e9aa93886",
+  "type": "citation",
+  "published": true,
+  "repost": false,
+  
+  "text": "text39",
+  "author": "Frank",
+  "tags": ["1b54654a-bb7c-446e-8164-db47d1ec3a48"]  
+}
+###

@@ -13,7 +13,7 @@ export class BlogPostEntity extends Entity implements StorableEntity<Post> {
   public type: PostType;
   public createdAt?: Date;
   public updatedAt?: Date;
-  public date: string;
+  
   public repost: boolean;
   public published: boolean;
   public likes?: [];
@@ -40,7 +40,7 @@ export class BlogPostEntity extends Entity implements StorableEntity<Post> {
       id: this.id,
       userId: this.userId,
       type: this.type,
-      date: this.date,
+      
       repost: this.repost,
       published: this.published,
       likes: this.likes,
@@ -84,11 +84,11 @@ export class BlogPostEntity extends Entity implements StorableEntity<Post> {
     }
   }
 
-  public populate(data: Post): void { 
+  public populate(data?: Post): void { 
     if (! data) {
       return;
     }
-    this.id = data.id ?? undefined
+    this.id = data.id ?? undefined;
     this.userId = data.userId;
     this.type = data.type;
     this.createdAt = data.createdAt;

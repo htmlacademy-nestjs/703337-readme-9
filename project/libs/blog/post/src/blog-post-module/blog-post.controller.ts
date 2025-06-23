@@ -1,13 +1,14 @@
-import { Body, Controller, Delete, Get, HttpStatus, HttpCode, Param, Patch, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, HttpCode, Param, Patch, Post, Query, UseGuards } from '@nestjs/common';
 import {fillDto} from '@project/shared/helpers';
 //import { CreateCommentDto, CommentRdo } from '@project/blog/comment';
 import { BlogPostService } from './blog-post.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { BlogPostRdo } from './rdo/blog-post.rdo';
-//import { Comment } from '@project/shared/core';
+import { Comment } from '@project/shared/core';
 import { BlogPostQuery } from './blog-post.query';
 import { BlogPostWithPaginationRdo } from './rdo/blog-post-with-pagination.rdo';
 import { UpdatePostDto } from './dto/update-post.dto';
+import {CheckTypeGuard} from '../../../guards/check-type.guard';
 
 @Controller('posts')
 export class BlogPostController {
@@ -31,8 +32,10 @@ export class BlogPostController {
     return fillDto(BlogPostWithPaginationRdo, result);
   }
   
+  @UseGuards(CheckTypeGuard)
   @Post('/')
   public async create(@Body() dto: CreatePostDto) {
+    //console.log(dto);
     const newPost = await this.blogPostService.createPost(dto);
     return fillDto(BlogPostRdo, newPost.toPOJO());
   }
@@ -49,9 +52,9 @@ export class BlogPostController {
     return fillDto(BlogPostRdo, updatedPost.toPOJO());
   }
 
-  // @Post('/:postId/comments')
-  // public async createComment(@Param('postId') postId: string, @Body() dto: Comment) {
-  //   const newComment = await this.blogPostService.addComment(postId, dto);
-  //   return newComment.toPOJO();
-  // }
+  @Post('/:postId/comments')
+  public async createComment(@Param('postId') postId: string, @Body() dto: Comment) {
+    const newComment = await this.blogPostService.addComment(postId, dto);
+    return newComment.toPOJO();
+  }
 }

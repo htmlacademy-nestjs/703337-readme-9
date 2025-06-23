@@ -1,4 +1,6 @@
 import {
+  ArrayMaxSize,
+  IsBoolean, IsOptional,
   IsMongoId,
   IsNotEmpty,
   IsString,
@@ -7,49 +9,61 @@ import {
 import { PostType } from '@project/shared/core';
 
 export class CreatePostDto {
+  
+  
   @IsString()
   @IsNotEmpty()
   public type: PostType;
 
-  @IsString()
+  @IsBoolean()
   @IsNotEmpty()
   public published: boolean;
 
-  @IsString()
+  @IsBoolean()
   @IsNotEmpty()
   public repost: boolean;
 
   @IsString()
   @IsMongoId()
-  public userId: string;
+  public userId?: string;
 
+  @ArrayMaxSize(8)
   @IsUUID('all', { each: true })
-  public tags: string[];
+  public tags?: string[];
+
+  @IsString()
+  @IsOptional()
+  public text?: string;
 
   @IsString()  
-  public text: string;
+  @IsOptional()
+  public message?: string;
 
-  @IsString()  
-  public message: string;
+  @IsString()
+  @IsOptional()
+  public preview?: string;
 
-  @IsString()  
-  public preview: string;
+  @IsString()
+  @IsOptional() 
+  public author?: string;
 
-  @IsString()  
-  public author: string;
+  @IsString()
+  @IsOptional() 
+  public photoPath?: string;
 
-  @IsString()  
-  public photoPath: string;
+  @IsString()
+  @IsOptional()
+  public name?: string;
 
-  @IsString()  
-  public name: string;
+  @IsString()
+  @IsOptional()
+  public link?: string;
 
-  @IsString()  
-  public link: string;
+  @IsString()
+  @IsOptional()
+  public reference?: string
 
-  @IsString()  
-  public reference: string
-
-  @IsString()  
-  public description: string;
+  @IsString()
+  @IsOptional()
+  public description?: string;
 }

@@ -23,7 +23,7 @@ datasource db {
 }
 
 model Post {
-  id          String   @id @default(uuid()) @map("id")
+  id          String   @id @default(uuid()) @db.Uuid
   userId      String @map("user_id")
   type        PostType
   createdAt   DateTime @default(now()) @map("created_at")
@@ -63,8 +63,8 @@ model Comment {
   userId      String    @map("user_id")
   createdAt   DateTime  @default(now()) @map("created_at")
   updatedAt   DateTime  @updatedAt @map("updated_at")
-  post        Post     @relation(fields: [postId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  postId      String    @map("post_id")
+  postId      String    @map("post_id") @unique @db.Uuid
+  post        Post     @relation(fields: [postId], references: [id], onDelete: Cascade, onUpdate: Cascade)  
   @@index([postId])
   @@map("comments")
 }
@@ -72,7 +72,7 @@ model Comment {
 model Like {
   id          String    @id @default(uuid())
   post        Post      @relation(fields: [postId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  postId      String    @map("post_id")
+  postId      String    @map("post_id") @unique @db.Uuid
   userId      String    @map("user_id")
   createdAt   DateTime  @default(now()) @map("created_at")
   updatedAt   DateTime  @updatedAt @map("updated_at")
